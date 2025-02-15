@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex AI Trading Strategy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Forex AI Trading Strategy</h1>
+        <p>Analyze market trends and execute buy/sell signals based on AI-driven sentiment analysis.</p>
+        
+        <h3>Latest Market Data</h3>
+        <div id="market-data">
+            <!-- Insert dynamic market data here -->
+        </div>
+
+        <h3>Sentiment Analysis</h3>
+        <p id="sentiment-result">Sentiment: <span id="sentiment-value"></span></p>
+        <p id="trade-signal">Trade Signal: <span id="signal-value"></span></p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        // Fetch market data and update the HTML dynamically
+        $(document).ready(function() {
+            $.getJSON('/market-data', function(data) {
+                $('#market-data').html(
+                    '<p>High Price: ' + data.high + '</p>' +
+                    '<p>Low Price: ' + data.low + '</p>' +
+                    '<p>Bid Price: ' + data.bid + '</p>' +
+                    '<p>Ask Price: ' + data.ask + '</p>' +
+                    '<p>Last Trade Price: ' + data.last + '</p>' +
+                    '<p>Change: ' + data.change + ' (' + data.percentage + '%)</p>' +
+                    '<p>Base Volume (BTC): ' + data.base_volume + '</p>' +
+                    '<p>Quote Volume (EUR): ' + data.quote_volume + '</p>'
+                );
+                $('#sentiment-value').text(data.sentiment);
+                // Set your trade signal logic based on the sentiment or other factors
+            });
+        });
+    </script>
+</body>
+</html>
